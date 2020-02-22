@@ -67,7 +67,8 @@ export default class AddRemoveElementTest extends Vue {
 			content: "removed all " + this.todos.todosAmount + " todos in a bunch!"
 		};
 		this.todos.clearTodos();
-		EventBus.$emit('my-child-event', msg);
+		//EventBus
+		this.$emit('myChildEvent', msg);
 	}
 
 
