@@ -16,14 +16,20 @@
 			</div>
 			<button class="m-2" @click="appendNewItem()">Add item</button>
 		</div>
-		<div class="m-2">
-			<span>
-				<input class="m-2" type="number" name="itr" id="itr" min="0" :max="maxindex()" v-model="index" />
-				<button @click="removeAt()" class="m-2">Remove at {{index}}</button>
-			</span>
+		<div v-if="isListCancellable">
+			<div class="m-2">
+				<span>
+					<input class="m-2" type="number" name="itr" id="itr" min="0" :max="maxindex()" v-model="index" />
+					<button @click="removeAt()" class="m-2">Remove at {{index}}</button>
+				</span>
+			</div>
+			<div class="m-2">
+				<button @click="removeAll()">Remove all Todos</button>
+			</div>
 		</div>
+
 		<div class="m-2">
-			<button @click="removeAll()">Remove all Todos</button>
+			<button @click="toggleListVisualization()">Toggle list visualization</button>
 		</div>
 	</div>
 </template>
@@ -32,16 +38,18 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-class-decorator";
 import { todos } from "@/vuex";
-import { Todo } from "@/store/todos"
-//import EventBusGolbal from "@/eventBus";
+import { Todo } from "@/store/todos";
+import EventBusGolbal from "@/eventBus";
 
 @Component({})
 export default class AddRemoveElementTest extends Vue {
 	@Prop({}) todos = todos;
 	newTodo: Todo = { id: 0, text: "" };
 	index: number = 0;
+	private isListCancellable: boolean = true;
 
 	mounted(): void {
+		EventBusGolbal.$on("toggleListCancellability", this.toggleListCancellabilityHandler);
 		if (this.todos.todosAmount == 0) {
 			let a = "helloworld:D".split("");
 			a.forEach((s, i) => {
@@ -60,6 +68,7 @@ export default class AddRemoveElementTest extends Vue {
 	removeAt(): void {
 		this.todos.removeAt(this.index);
 	}
+
 	removeAll(): void {
 		//emit an event to the parent to notify the clear operation
 		let msg = {
@@ -71,10 +80,20 @@ export default class AddRemoveElementTest extends Vue {
 		this.$emit('myChildEvent', msg);
 	}
 
-
 	appendNewItem(): void {
 		this.todos.add(this.newTodo);
 		this.newTodo = { id: 0, text: "" };
+	}
+
+	/**Communicate to list component to toggle the visualization of the list*/
+	toggleListVisualization(): void {
+		EventBusGolbal.$emit('toggleListVisualization', "Toggle the list visualization");
+	}
+
+	/**Event handler */
+	toggleListCancellabilityHandler(msg: any): void {
+		console.log(JSON.stringify(msg));
+		this.isListCancellable = !this.isListCancellable;
 	}
 }
 </script>

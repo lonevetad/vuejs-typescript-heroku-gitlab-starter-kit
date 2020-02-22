@@ -14,9 +14,9 @@
 			</span>
 		</div>
 
-		<AddRemoveElementTest class="m-1" :todos="todos" @myChildEvent="onmyChildEventMsg"></AddRemoveElementTest>
+		<AddRemoveElementTest class="m-1 borderAddRem" :todos="todos" @myChildEvent="onmyChildEventMsg"></AddRemoveElementTest>
 
-		<ListElementTest class="m-1" :todos="todos"></ListElementTest>
+		<ListElementTest class="m-1 borderList" :todos="todos"></ListElementTest>
 	</div>
 </template>
 <script lang="ts">
@@ -24,7 +24,6 @@ import { Vue, Component } from 'vue-class-decorator';
 import { ListElementTest } from '@/components'
 import { AddRemoveElementTest } from '@/components'
 import { todos } from "@/vuex";
-//import EventBusGolbal from "@/eventBus";
 
 @Component({
 	components: {
@@ -38,7 +37,6 @@ export default class WithComponentsPage extends Vue {
 	private myChildEventMsg: { who: string, content: string } = { who: "", content: "" };
 
 	mounted(): void {
-		//EventBusGolbal.$on("myChildEvent", this.onmyChildEventMsg);
 	}
 
 	get computedInfo(): number {
@@ -70,6 +68,12 @@ export default class WithComponentsPage extends Vue {
 </script>
 <style lang="scss" scoped>
 .mceAlert {
-	border: 2px solid blue;
+	border: 2px solid orange;
+}
+.borderList {
+	border: 1px solid green;
+}
+.borderAddRem {
+	border: 1px solid blue;
 }
 </style>
