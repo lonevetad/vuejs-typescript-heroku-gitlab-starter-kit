@@ -24,7 +24,7 @@ import { Vue, Component } from 'vue-class-decorator';
 import { ListElementTest } from '@/components'
 import { AddRemoveElementTest } from '@/components'
 import { todos } from "@/vuex";
-import EventBus from "@/eventBus";
+//import EventBusGolbal from "@/eventBus";
 
 @Component({
 	components: {
@@ -38,7 +38,7 @@ export default class WithComponentsPage extends Vue {
 	private myChildEventMsg: { who: string, content: string } = { who: "", content: "" };
 
 	mounted(): void {
-		//EventBus.$on("myChildEvent", this.onmyChildEventMsg);
+		//EventBusGolbal.$on("myChildEvent", this.onmyChildEventMsg);
 	}
 
 	get computedInfo(): number {

@@ -33,7 +33,7 @@
 import { Vue, Component, Prop } from "vue-class-decorator";
 import { todos } from "@/vuex";
 import { Todo } from "@/store/todos"
-import EventBus from "@/eventBus";
+//import EventBusGolbal from "@/eventBus";
 
 @Component({})
 export default class AddRemoveElementTest extends Vue {
@@ -67,7 +67,7 @@ export default class AddRemoveElementTest extends Vue {
 			content: "removed all " + this.todos.todosAmount + " todos in a bunch!"
 		};
 		this.todos.clearTodos();
-		//EventBus
+		//EventBusGolbal
 		this.$emit('myChildEvent', msg);
 	}
 
