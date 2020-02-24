@@ -1,9 +1,11 @@
 import HomePage from "./HomePage.vue";
 import AboutPage from "./AboutPage.vue";
 import WithComponentsPage from "./WithComponentsPage.vue";
+import MatrixRotationPage from "./MatrixRotationPage.vue";
 
-export { 
+export {
     HomePage,
     AboutPage,
-    WithComponentsPage
+    WithComponentsPage,
+    MatrixRotationPage,
 };

@@ -8,11 +8,14 @@
 		<br />
 		<button @click="triggerIncrement()">INCREMENT!</button>
 		<br />
-		<button @click="goToAbout()">Go to About!</button>
+		<button @click="goTo('about')">Go to About!</button>
 		<br />
 		<label>
-			<button @click="goToTodos()">Go to Todos page</button> (Testing storing arrays on vuex and dialog within components)
+			<button @click="goTo('todos')">Go to Todos page</button> (Testing storing arrays on vuex and dialog within components)
 		</label>
+		<br />
+		<button @click="goTo('matrix')">Go to Matrix!</button>
+		<br />
 	</div>
 </template>
 <script lang="ts">
@@ -36,20 +39,14 @@ export default class HomePage extends Vue {
 		alert("Well done");
 	}
 
-	goToAbout(): void {
-		this.$router.push({
-			name: "about"
-		});
-	}
-
-	goToTodos(): void {
-		this.$router.push({
-			name: "todos"
-		});
-	}
 
 	triggerIncrement(): void {
 		this.example.bicrement();
+	}
+	goTo(where: string): void {
+		this.$router.push({
+			name: where
+		});
 	}
 }
 </script>

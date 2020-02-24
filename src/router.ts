@@ -2,10 +2,11 @@ import Vue from "vue";
 import Router from "vue-router";
 import { Route } from 'vue-router/types/router';
 
-import { 
+import {
   HomePage,
   AboutPage,
-  WithComponentsPage
+  WithComponentsPage,
+  MatrixRotationPage
 } from "@/views";
 
 Vue.use(Router);
@@ -18,25 +19,32 @@ const router = new Router({
       path: "/",
       name: "home",
       component: HomePage,
-      meta: { title : "VueJS Typescript Starter Kit" },
+      meta: { title: "VueJS Typescript Starter Kit" },
     },
     {
       path: "/about",
       name: "about",
       component: AboutPage,
-      meta: { title : "VueJS Typescript Starter Kit - About" },
+      meta: { title: "VueJS Typescript Starter Kit - About" },
     },
     {
       path: "/todos",
       name: "todos",
       component: WithComponentsPage,
-      meta: { title : "VueJS Typescript Starter Kit - Components" },
+      meta: { title: "VueJS Typescript Starter Kit - Components" },
     },
+    {
+      path: "/matrix",
+      name: "matrix",
+      component: MatrixRotationPage,
+      meta: { title: "VueJS Typescript Starter Kit - Matrix" },
+    },
+
   ]
 });
 
 // puts the meta title as window title.
-router.beforeEach((to: Route, _ : Route, next) => {
+router.beforeEach((to: Route, _: Route, next) => {
   document.title = to.meta.title;
   next();
 })
